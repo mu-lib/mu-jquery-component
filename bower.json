@@ -1,0 +1,23 @@
+{
+  "name": "mu-jquery-component",
+  "authors": [
+    "Mikael Karon <mikael@karon.se>"
+  ],
+  "description": "Components for jQuery",
+  "main": "main.js",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "mu-jquery-wire": "^5.0.0",
+    "mu-jquery-crank": "^3.0.0"
+  },
+  "devDependencies": {
+    "qunit": "^2.0.1"
+  }
+}

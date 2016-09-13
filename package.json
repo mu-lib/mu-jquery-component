@@ -1,0 +1,22 @@
+{
+  "name": "mu-jquery-component",
+  "description": "Components for jQuery",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mu-lib/mu-jquery-component.git"
+  },
+  "author": "Mikael Karon <mikael@karon.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mu-lib/mu-jquery-component/issues"
+  },
+  "homepage": "https://github.com/mu-lib/mu-jquery-component#readme",
+  "devDependencies": {
+    "standard-version": "^2.4.0"
+  }
+}

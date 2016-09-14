@@ -16,7 +16,13 @@
     "url": "https://github.com/mu-lib/mu-jquery-component/issues"
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-component#readme",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "mu-jquery-wire": "^5.0.1",
+    "mu-jquery-crank": "^3.0.1"
+  },
   "devDependencies": {
-    "standard-version": "^2.4.0"
+    "standard-version": "^2.4.0",
+    "qunit": "^2.0.1"
   }
 }

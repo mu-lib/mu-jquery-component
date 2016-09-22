@@ -49,7 +49,7 @@
 
   QUnit.module("mu-jquery-component/jquery.twist#callback");
 
-  QUnit.test("called for each element with correct parameters", function (assert) {
+  QUnit.test("typeof(function) called for each element with correct parameters", function (assert) {
     var m = ["one", "two"];
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", m.join(" "));
@@ -63,7 +63,7 @@
       });
   });
 
-  QUnit.test("called in correct scope", function (assert) {
+  QUnit.test("typeof(function) called in correct scope", function (assert) {
     var m = ["one", "two"];
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", m.join(" "));
@@ -74,6 +74,58 @@
       .call($elements, "mu-widget", function(module, index) {
         assert.strictEqual(this, $elements, "scope matches");
         return load.apply(this, arguments);
+      });
+  });
+
+  QUnit.test("!typeof(function).callback called for each element with correct parameters", function (assert) {
+    var m = ["one", "two"];
+    var $elements = $("<span></span><div></div>")
+      .attr("mu-widget", m.join(" "));
+
+    assert.expect($elements.length * m.length);
+
+    return twist
+      .call($elements, "mu-widget", {
+        "callback": function(module, index) {
+          assert.strictEqual(module, m[index], "check that module matches");
+          return load.apply(this, arguments);
+        }
+      });
+  });
+
+  QUnit.test("!typeof(function).create called for each element with correct parameters", function (assert) {
+    var m = ["one", "two"];
+    var $elements = $("<span></span><div></div>")
+      .attr("mu-widget", m.join(" "));
+    var count = 0;
+
+    assert.expect($elements.length * m.length * 3);
+
+    return twist
+      .call($elements, "mu-widget", {
+        "callback": load,
+        "create": function(c, args) {
+          assert.strictEqual(c, load.call(this, m[count % m.length]), "check that instance matches");
+          assert.ok(args[0].is($elements[Math.floor(count / $elements.length)]), "args[0] matches $element");
+          assert.strictEqual(args[1], id.call(m[count % 2], ++count), "args[1] matches ns");
+        }
+      });
+  });
+
+  QUnit.test("!typeof(function).create called in correct scope", function (assert) {
+    var m = ["one", "two"];
+    var $elements = $("<span></span><div></div>")
+      .attr("mu-widget", m.join(" "));
+    var count = 0;
+
+    assert.expect($elements.length * m.length);
+
+    return twist
+      .call($elements, "mu-widget", {
+        "callback": load,
+        "create": function(c, args) {
+          assert.strictEqual(this, $elements, "scope matches");
+        }
       });
   });
 

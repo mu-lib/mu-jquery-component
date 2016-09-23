@@ -4,7 +4,7 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-component/create"] = factory.apply(root, modules.map(function(m) {
+    root["mu-jquery-loom/create"] = factory.apply(root, modules.map(function(m) {
       return root[m];
     }));
   }

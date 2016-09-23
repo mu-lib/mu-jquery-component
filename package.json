@@ -1,6 +1,6 @@
 {
-  "name": "mu-jquery-component",
-  "description": "Components for jQuery",
+  "name": "mu-jquery-loom",
+  "description": "Loom components for jQuery",
   "version": "0.1.0",
   "main": "main.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mu-lib/mu-jquery-component.git"
+    "url": "git+https://github.com/mu-lib/mu-jquery-loom.git"
   },
   "author": "Mikael Karon <mikael@karon.se>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mu-lib/mu-jquery-component/issues"
+    "url": "https://github.com/mu-lib/mu-jquery-loom/issues"
   },
-  "homepage": "https://github.com/mu-lib/mu-jquery-component#readme",
+  "homepage": "https://github.com/mu-lib/mu-jquery-loom#readme",
   "dependencies": {
     "jquery": "^3.1.0",
     "mu-jquery-wire": "^5.0.1",

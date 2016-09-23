@@ -4,11 +4,11 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-component/tests/jquery.weave"] = factory.apply(root, modules.map(function (m) {
+    root["mu-jquery-loom/tests/jquery.weave"] = factory.apply(root, modules.map(function (m) {
       return {
         "jquery": root.jQuery,
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-component")] || root[m];
+      }[m = m.replace(/^\.{2}/, "mu-jquery-loom")] || root[m];
     }));
   }
 })([
@@ -50,7 +50,7 @@
     }
   }
 
-  QUnit.module("mu-jquery-component/jquery.weave#result");
+  QUnit.module("mu-jquery-loom/jquery.weave#result");
 
   QUnit.test("1/1 (widgets/elements)", function (assert) {
     var $elements = $("<span></span>")
@@ -98,7 +98,7 @@
       .done(assert_result.call(assert, m, $elements));
   });
 
-  QUnit.module("mu-jquery-component/jquery.weave#initialize");
+  QUnit.module("mu-jquery-loom/jquery.weave#initialize");
 
   QUnit.test("triggered on all elements", function (assert) {
     var $elements = $("<span></span><div></div>").each(function (index, element) {

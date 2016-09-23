@@ -1,9 +1,9 @@
 {
-  "name": "mu-jquery-component",
+  "name": "mu-jquery-loom",
   "authors": [
     "Mikael Karon <mikael@karon.se>"
   ],
-  "description": "Components for jQuery",
+  "description": "Loom components for jQuery",
   "main": "main.js",
   "license": "MIT",
   "homepage": "",

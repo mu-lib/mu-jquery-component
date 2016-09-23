@@ -4,10 +4,10 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-component/jquery.weave"] = factory.apply(root, modules.map(function(m) {
+    root["mu-jquery-loom/jquery.weave"] = factory.apply(root, modules.map(function(m) {
       return {
         "jquery": root.jQuery
-      }[m] || root[m.replace(/^\./, "mu-jquery-component")];
+      }[m] || root[m.replace(/^\./, "mu-jquery-loom")];
     }));
   }
 })([

@@ -4,10 +4,10 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-component/jquery.twist"] = factory.apply(root, modules.map(function(m) {
+    root["mu-jquery-loom/jquery.twist"] = factory.apply(root, modules.map(function(m) {
       return {
         "jquery": root.jQuery
-      }[m = m.replace(/^\./, "mu-jquery-component")] || root[m];
+      }[m = m.replace(/^\./, "mu-jquery-loom")] || root[m];
     }));
   }
 })([

@@ -4,11 +4,11 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-component/tests/jquery.twist"] = factory.apply(root, modules.map(function (m) {
+    root["mu-jquery-loom/tests/jquery.twist"] = factory.apply(root, modules.map(function (m) {
       return {
         "jquery": root.jQuery,
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-component")] || root[m];
+      }[m = m.replace(/^\.{2}/, "mu-jquery-loom")] || root[m];
     }));
   }
 })([
@@ -47,7 +47,7 @@
     }
   }
 
-  QUnit.module("mu-jquery-component/jquery.twist#callback");
+  QUnit.module("mu-jquery-loom/jquery.twist#callback");
 
   QUnit.test("typeof(function) called for each element with correct parameters", function (assert) {
     var m = ["one", "two"];
@@ -129,7 +129,7 @@
       });
   });
 
-  QUnit.module("mu-jquery-component/jquery.twist#constructor");
+  QUnit.module("mu-jquery-loom/jquery.twist#constructor");
 
   QUnit.test("default arguments", function (assert) {
     var m = [ "one", "two" ];
@@ -170,7 +170,7 @@
       }, o);
   });
 
-  QUnit.module("mu-jquery-component/jquery.twist#result");
+  QUnit.module("mu-jquery-loom/jquery.twist#result");
 
   QUnit.test("1/1 (widgets/elements)", function (assert) {
     var $elements = $("<span></span>")

@@ -1,7 +1,7 @@
 {
   "name": "mu-jquery-loom",
   "description": "Loom components for jQuery",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "scripts": {
     "release": "standard-version"

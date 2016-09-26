@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/mu-lib/mu-jquery-loom/compare/v1.0.0...v1.0.1) (2016-09-26)
+
+
+### Bug Fixes
+
+* **deps:** bumped mu-jquery-wire to 5.2.0 ([f52b823](https://github.com/mu-lib/mu-jquery-loom/commit/f52b823))
+* **jquery.crank:** fix package name ([86f32e8](https://github.com/mu-lib/mu-jquery-loom/commit/86f32e8))
+* **tests:** correct script includes ([fa9a6f3](https://github.com/mu-lib/mu-jquery-loom/commit/fa9a6f3))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/mu-lib/mu-jquery-loom/compare/v0.1.0...v1.0.0) (2016-09-23)
 

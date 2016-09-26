@@ -12,7 +12,7 @@
   }
 })([
   "jquery",
-  "mu-jquery-wire/jquery.crank"
+  "mu-jquery-crank/jquery.crank"
 ], this, function($, crank) {
   var slice = Array.prototype.slice;
   var re = /\s+/;

@@ -5,11 +5,11 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-loom/tests/jquery.loom"] = factory.apply(root, modules.map(function (m) {
-      return {
+      return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-loom")];
+    }, {
         "jquery": root.jQuery,
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-loom")] || root[m];
-    }));
+      }));
   }
 })([
   "qunit",
@@ -21,7 +21,7 @@
     return this + "@" + count;
   }
 
-  QUnit.testDone(function(details) {
+  QUnit.testDone(function (details) {
     delete $.fn.crank;
     delete $.fn.twist;
     delete $.fn.weave;
@@ -38,12 +38,12 @@
     var $e = $("<div></div>").attr("mu-widget", m);
 
     return loom.call($e, "[mu-widget]", "mu-widget", function () {
-        return function ($element, ns) {
-          assert.strictEqual(arguments.length, 2, "arguments.length is 2");
-          assert.ok($element.is($e), "$element matches");
-          assert.strictEqual(ns, name.call(m, ++count), "ns matches");
-        };
-      })
+      return function ($element, ns) {
+        assert.strictEqual(arguments.length, 2, "arguments.length is 2");
+        assert.ok($element.is($e), "$element matches");
+        assert.strictEqual(ns, name.call(m, ++count), "ns matches");
+      };
+    })
       .weave();
   });
 
@@ -56,13 +56,13 @@
     var obj = {};
 
     return loom.call($e, "[mu-widget]", "mu-widget", function () {
-        return function ($element, ns, o) {
-          assert.strictEqual(arguments.length, 3, "arguments.length is 3");
-          assert.ok($element.is($e), "$element matches");
-          assert.strictEqual(ns, name.call(m, ++count), "ns matches");
-          assert.strictEqual(o, obj);
-        };
-      }, obj)
+      return function ($element, ns, o) {
+        assert.strictEqual(arguments.length, 3, "arguments.length is 3");
+        assert.ok($element.is($e), "$element matches");
+        assert.strictEqual(ns, name.call(m, ++count), "ns matches");
+        assert.strictEqual(o, obj);
+      };
+    }, obj)
       .weave();
   });
 
@@ -72,13 +72,13 @@
     var $e = $("<div></div>").attr("mu-widget", "test");
 
     return loom.call($e, "[mu-widget]", "mu-widget", function () {
-        return function ($element, ns) {
-          this.$element = $element.on("initialize." + ns, function () {
-            assert.ok(true, "initialize called");
-          });
-          this.ns = ns;
-        };
-      })
+      return function ($element, ns) {
+        this.$element = $element.on("initialize." + ns, function () {
+          assert.ok(true, "initialize called");
+        });
+        this.ns = ns;
+      };
+    })
       .weave();
   });
 });

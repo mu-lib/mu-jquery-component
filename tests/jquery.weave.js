@@ -5,11 +5,11 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-loom/tests/jquery.weave"] = factory.apply(root, modules.map(function (m) {
-      return {
+      return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-loom")];
+    }, {
         "jquery": root.jQuery,
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-loom")] || root[m];
-    }));
+      }));
   }
 })([
   "qunit",
@@ -18,9 +18,9 @@
 ], this, function (QUnit, $, weave) {
   var slice = Array.prototype.slice;
   var setTimeout = this.setTimeout;
-  
+
   var modules = {
-    "widget": function($element, ns) {
+    "widget": function ($element, ns) {
       var self = this;
 
       self.$element = $element;
@@ -41,7 +41,7 @@
 
     return function (result) {
       $.each(result, function (index, widgets) {
-        $.each(widgets, function(count, widget) {
+        $.each(widgets, function (count, widget) {
           assert.ok(widget instanceof load(m[count]), "instanceof widgets");
           assert.ok(widget.$element.is($elements[index]), "widget.$element");
           assert.strictEqual(widget.ns, id.call(m[count], index * m.length + count + 1), "widget.ns");
@@ -75,7 +75,7 @@
   });
 
   QUnit.test("n/1 (widgets/elements)", function (assert) {
-    var m = [ "one", "two" ]
+    var m = ["one", "two"]
     var $elements = $("<span></span>")
       .attr("mu-widget", m.join(" "));
 
@@ -87,7 +87,7 @@
   });
 
   QUnit.test("n/n (widgets/elements)", function (assert) {
-    var m = [ "one", "two" ]
+    var m = ["one", "two"]
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", m.join(" "));
 
@@ -104,7 +104,7 @@
     var $elements = $("<span></span><div></div>").each(function (index, element) {
       $(element)
         .attr("mu-widget", "one")
-        .on("initialize." + id.call("one", index + 1), function() {
+        .on("initialize." + id.call("one", index + 1), function () {
           assert.ok(true, "initialize called");
         });
     });
@@ -119,10 +119,10 @@
     var $elements = $("<span></span><div></div>").each(function (index, element) {
       $(element)
         .attr("mu-widget", "one")
-        .on("initialize." + id.call("one", index + 1), function() {
+        .on("initialize." + id.call("one", index + 1), function () {
           return $.Deferred(function (deferred) {
             setTimeout(deferred.resolve, 0);
-          }).done(function() {
+          }).done(function () {
             assert.ok(true, "initialize called");
           });
         });

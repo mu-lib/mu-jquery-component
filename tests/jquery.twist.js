@@ -5,11 +5,11 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-loom/tests/jquery.twist"] = factory.apply(root, modules.map(function (m) {
-      return {
+      return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-loom")];
+    }, {
         "jquery": root.jQuery,
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-loom")] || root[m];
-    }));
+      }));
   }
 })([
   "qunit",
@@ -17,7 +17,7 @@
   "../jquery.twist"
 ], this, function (QUnit, $, twist) {
   var modules = {
-    "widget": function($element, ns) {
+    "widget": function ($element, ns) {
       var me = this;
 
       me.ns = ns;
@@ -38,7 +38,7 @@
 
     return function (result) {
       $.each(result, function (index, widgets) {
-        $.each(widgets, function(count, widget) {
+        $.each(widgets, function (count, widget) {
           assert.ok(widget instanceof load(m[count]), "instanceof widgets");
           assert.ok(widget.$element.is($elements[index]), "widget.$element");
           assert.strictEqual(widget.ns, id.call(m[count], index * m.length + count + 1), "widget.ns");
@@ -57,7 +57,7 @@
     assert.expect($elements.length * m.length);
 
     return twist
-      .call($elements, "mu-widget", function(module, index) {
+      .call($elements, "mu-widget", function (module, index) {
         assert.strictEqual(module, m[index], "check that module matches");
         return load.apply(this, arguments);
       });
@@ -71,7 +71,7 @@
     assert.expect($elements.length * m.length);
 
     return twist
-      .call($elements, "mu-widget", function(module, index) {
+      .call($elements, "mu-widget", function (module, index) {
         assert.strictEqual(this, $elements, "scope matches");
         return load.apply(this, arguments);
       });
@@ -86,7 +86,7 @@
 
     return twist
       .call($elements, "mu-widget", {
-        "callback": function(module, index) {
+        "callback": function (module, index) {
           assert.strictEqual(module, m[index], "check that module matches");
           return load.apply(this, arguments);
         }
@@ -104,7 +104,7 @@
     return twist
       .call($elements, "mu-widget", {
         "callback": load,
-        "create": function(c, args) {
+        "create": function (c, args) {
           assert.strictEqual(c, load.call(this, m[count % m.length]), "check that instance matches");
           assert.ok(args[0].is($elements[Math.floor(count / $elements.length)]), "args[0] matches $element");
           assert.strictEqual(args[1], id.call(m[count % 2], ++count), "args[1] matches ns");
@@ -123,7 +123,7 @@
     return twist
       .call($elements, "mu-widget", {
         "callback": load,
-        "create": function(c, args) {
+        "create": function (c, args) {
           assert.strictEqual(this, $elements, "scope matches");
         }
       });
@@ -132,7 +132,7 @@
   QUnit.module("mu-jquery-loom/jquery.twist#constructor");
 
   QUnit.test("default arguments", function (assert) {
-    var m = [ "one", "two" ];
+    var m = ["one", "two"];
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", m.join(" "));
     var count = 0;
@@ -144,14 +144,14 @@
     assert.expect($elements.length * m.length * 2);
 
     return twist
-      .call($elements, "mu-widget", function(module) {
+      .call($elements, "mu-widget", function (module) {
         return {
           "one": widget,
           "two": widget
         }[module] || load.apply(this, arguments);
       });
   });
-  
+
   QUnit.test("extra arguments", function (assert) {
     var $elements = $("<span></span>")
       .attr("mu-widget", "one");
@@ -163,7 +163,7 @@
     assert.expect($elements.length);
 
     return twist
-      .call($elements, "mu-widget", function(module) {
+      .call($elements, "mu-widget", function (module) {
         return {
           "one": one
         }[module] || load.apply(this, arguments);
@@ -195,7 +195,7 @@
   });
 
   QUnit.test("n/1 (widgets/elements)", function (assert) {
-    var m = [ "one", "two" ]
+    var m = ["one", "two"]
     var $elements = $("<span></span>")
       .attr("mu-widget", m.join(" "));
 
@@ -207,7 +207,7 @@
   });
 
   QUnit.test("n/n (widgets/elements)", function (assert) {
-    var m = [ "one", "two" ]
+    var m = ["one", "two"]
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", m.join(" "));
 

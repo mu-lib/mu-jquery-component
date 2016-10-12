@@ -1,20 +1,20 @@
-(function(modules, root, factory) {
+(function (modules, root, factory) {
   if (typeof define === "function" && define.amd) {
     define(modules, factory);
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-loom/jquery.weave"] = factory.apply(root, modules.map(function(m) {
-      return {
+    root["mu-jquery-loom/jquery.weave"] = factory.apply(root, modules.map(function (m) {
+      return this[m] || root[m.replace(/^\./, "mu-jquery-loom")];
+    }, {
         "jquery": root.jQuery
-      }[m] || root[m.replace(/^\./, "mu-jquery-loom")];
-    }));
+      }));
   }
 })([
   "jquery",
   "./jquery.twist",
   "mu-jquery-crank/jquery.crank"
-], this, function($, twist, crank) {
+], this, function ($, twist, crank) {
   var slice = Array.prototype.slice;
 
   function collect() {
@@ -26,7 +26,7 @@
   }
 
   function initialize(widgets, index) {
-    return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize").then(function() {
+    return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize").then(function () {
       return widgets;
     });
   }
@@ -35,7 +35,7 @@
     return $.when.apply(null, $.map(result, initialize)).then(collect);
   }
 
-  return function() {
+  return function () {
     return twist.apply(this, slice.call(arguments)).then(weave);
   }
 });

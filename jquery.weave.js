@@ -5,16 +5,10 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-loom/jquery.weave"] = factory.apply(root, modules.map(function (m) {
-      return this[m] || root[m.replace(/^\./, "mu-jquery-loom")];
-    }, {
-        "jquery": root.jQuery
-      }));
+      return root[m.replace(/^\./, "mu-jquery-loom")];
+    }));
   }
-})([
-  "jquery",
-  "./jquery.twist",
-  "mu-jquery-crank/jquery.crank"
-], this, function ($, twist, crank) {
+})(["./jquery.twist", "mu-jquery-crank/jquery.crank"], this, function (twist, crank) {
   var slice = Array.prototype.slice;
 
   function collect() {

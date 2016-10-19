@@ -5,21 +5,16 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-loom/jquery.crank"] = factory.apply(root, modules.map(function (m) {
-      return this[m] || root[m];
-    }, {
-        "jquery": root.jQuery
-      }));
+      return root[m];
+    }));
   }
-})([
-  "jquery",
-  "mu-jquery-crank/jquery.crank"
-], this, function ($, crank) {
+})(["mu-jquery-crank/jquery.crank"], this, function (crank) {
   var slice = Array.prototype.slice;
-  var re = /\s+/;
+  var re_space = /\s+/;
 
   return function (attr) {
     return crank.apply(this, [function ($element) {
-      return ($element.attr(attr) || "").split(re);
+      return ($element.attr(attr) || "").split(re_space);
     }].concat(slice.call(arguments, 1)));
   }
 });

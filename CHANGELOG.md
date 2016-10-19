@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/mu-lib/mu-jquery-loom/compare/v1.1.1...v1.1.2) (2016-10-19)
+
+
+### Bug Fixes
+
+* UMD fixes ([9984e28](https://github.com/mu-lib/mu-jquery-loom/commit/9984e28))
+* use provided jQuery ([b6e9c53](https://github.com/mu-lib/mu-jquery-loom/commit/b6e9c53))
+* **packaging:** bumped deps ([a2a9c48](https://github.com/mu-lib/mu-jquery-loom/commit/a2a9c48))
+* **packaging:** jQuery versions ([2261787](https://github.com/mu-lib/mu-jquery-loom/commit/2261787))
+* **tests:** update constructors ([2c899d0](https://github.com/mu-lib/mu-jquery-loom/commit/2c899d0))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/mu-lib/mu-jquery-loom/compare/v1.1.0...v1.1.1) (2016-10-12)
 

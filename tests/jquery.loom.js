@@ -39,6 +39,8 @@
 
     return loom.call($e, "[mu-widget]", "mu-widget", function () {
       return function ($element, ns) {
+        this.$element = $element;
+        this.ns = ns;
         assert.strictEqual(arguments.length, 2, "arguments.length is 2");
         assert.ok($element.is($e), "$element matches");
         assert.strictEqual(ns, name.call(m, ++count), "ns matches");
@@ -57,6 +59,8 @@
 
     return loom.call($e, "[mu-widget]", "mu-widget", function () {
       return function ($element, ns, o) {
+        this.$element = $element;
+        this.ns = ns;
         assert.strictEqual(arguments.length, 3, "arguments.length is 3");
         assert.ok($element.is($e), "$element matches");
         assert.strictEqual(ns, name.call(m, ++count), "ns matches");

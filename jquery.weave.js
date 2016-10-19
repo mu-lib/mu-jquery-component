@@ -19,17 +19,16 @@
     return widget.ns;
   }
 
-  function initialize(widgets, index) {
-    return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize").then(function () {
-      return widgets;
-    });
-  }
-
-  function weave(result) {
-    return $.when.apply(null, $.map(result, initialize)).then(collect);
-  }
-
   return function () {
-    return twist.apply(this, slice.call(arguments)).then(weave);
+    var me = this;
+    var $ = me.constructor;
+
+    return twist.apply(me, slice.call(arguments)).then(function (result) {
+      return $.when.apply(null, $.map(result, function (widgets, index) {
+        return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize").then(function () {
+          return widgets;
+        });
+      })).then(collect);
+    });
   }
 });

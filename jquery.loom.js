@@ -19,7 +19,7 @@
     var args = slice.call(arguments, 1);
     var a = args.slice(0, 1);
 
-    $.extend(this.constructor.fn, {
+    this.extend({
       "crank": function () {
         return crank.apply(find.call(this, selector), a.concat(slice.call(arguments)));
       },

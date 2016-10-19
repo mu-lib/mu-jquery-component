@@ -22,6 +22,7 @@
     var count = 0;
     var _create = create;
     var _callback = callback;
+    var $ = this.constructor;
 
     if (!$.isFunction(callback)) {
       _create = callback.create || _create;

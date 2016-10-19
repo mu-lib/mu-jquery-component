@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-loom#readme",
   "dependencies": {
-    "mu-jquery-wire": "^5.0.3",
-    "mu-jquery-crank": "^3.0.2"
+    "mu-jquery-wire": "^5.0.5",
+    "mu-jquery-crank": "^3.0.3"
   },
   "peerDependencies": {
     "jquery": "^3.0.0"

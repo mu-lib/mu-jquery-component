@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/mu-lib/mu-jquery-loom/compare/v1.1.2...v3.0.0) (2017-04-06)
+
+
+### Features
+
+* initialize triggerd with complete callback ([4965486](https://github.com/mu-lib/mu-jquery-loom/commit/4965486))
+
+
+### BREAKING CHANGES
+
+* with the upgrade of mu-jquery-widget arrays are unwrapped.
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/mu-lib/mu-jquery-loom/compare/v1.1.1...v1.1.2) (2016-10-19)
 

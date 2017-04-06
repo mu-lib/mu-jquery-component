@@ -1,7 +1,7 @@
 {
   "name": "mu-jquery-loom",
   "description": "Loom components for jQuery",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "main": "main.js",
   "scripts": {
     "release": "standard-version"
@@ -17,15 +17,15 @@
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-loom#readme",
   "dependencies": {
-    "mu-jquery-wire": "^5.0.5",
-    "mu-jquery-crank": "^3.0.3"
+    "mu-jquery-wire": "^5.0.6",
+    "mu-jquery-crank": "^4.0.1"
   },
   "peerDependencies": {
     "jquery": "^3.0.0"
   },
   "devDependencies": {
-    "qunitjs": "^2.0.1",
-    "jquery": "^3.1.1",
-    "standard-version": "^2.4.0"
+    "qunitjs": "^2.3.0",
+    "jquery": "^3.2.1",
+    "standard-version": "^4.0.0"
   }
 }

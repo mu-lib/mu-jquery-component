@@ -14,8 +14,9 @@
 })([
   "qunit",
   "jquery",
-  "../jquery.weave",
-], this, function (QUnit, $, weave) {
+  "mu-jquery-crank/collect",
+  "../jquery.weave"
+], this, function (QUnit, $, collect, weave) {
   var slice = Array.prototype.slice;
   var setTimeout = this.setTimeout;
 
@@ -114,18 +115,38 @@
     return weave.call($elements, "mu-widget", load);
   });
 
+  QUnit.test("callback triggered after all handlers", function (assert) {
+    var $elements = $("<span></span><div></div>").each(function (index, element) {
+      var _id = id.call("one", index + 1);
+      $(element)
+        .attr("mu-widget", "one")
+        .on("initialize." + _id, function () {
+          assert.ok(true, "initialize called");
+        })
+        .on("initialize." + _id, function ($event, cb) {
+          cb(function(result) {
+            assert.deepEqual(result, [[_id]], "callback called");
+          });
+        });
+    });
+
+    assert.expect($elements.length * 2);
+
+    return weave.call($elements, "mu-widget", load);
+  });
+
   QUnit.test("return promise to delay result", function (assert) {
     var count = 0;
     var $elements = $("<span></span><div></div>").each(function (index, element) {
       $(element)
         .attr("mu-widget", "one")
-        .on("initialize." + id.call("one", index + 1), function () {
+        .on("initialize." + id.call("one", index + 1), collect(function () {
           return $.Deferred(function (deferred) {
             setTimeout(deferred.resolve, 0);
           }).done(function () {
             assert.ok(true, "initialize called");
           });
-        });
+        }));
     });
 
     assert.expect($elements.length + 1);

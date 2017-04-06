@@ -25,9 +25,12 @@
 
     return twist.apply(me, slice.call(arguments)).then(function (result) {
       return $.when.apply(null, $.map(result, function (widgets, index) {
-        return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize").then(function () {
-          return widgets;
-        });
+        var callbacks;
+        return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize", (callbacks = $.Callbacks("once")).add)
+          .then(callbacks.fire)
+          .then(function () {
+            return widgets;
+          });
       })).then(collect);
     });
   }

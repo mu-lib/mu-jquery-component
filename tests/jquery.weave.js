@@ -14,9 +14,9 @@
 })([
   "qunit",
   "jquery",
-  "mu-jquery-crank/collect",
+  "mu-jquery-capture/capture",
   "../jquery.weave"
-], this, function (QUnit, $, collect, weave) {
+], this, function (QUnit, $, capture, weave) {
   var slice = Array.prototype.slice;
   var setTimeout = this.setTimeout;
 
@@ -140,7 +140,7 @@
     var $elements = $("<span></span><div></div>").each(function (index, element) {
       $(element)
         .attr("mu-widget", "one")
-        .on("initialize." + id.call("one", index + 1), collect(function () {
+        .on("initialize." + id.call("one", index + 1), capture.call($, function () {
           return $.Deferred(function (deferred) {
             setTimeout(deferred.resolve, 0);
           }).done(function () {

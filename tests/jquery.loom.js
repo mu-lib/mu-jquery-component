@@ -31,58 +31,66 @@
   QUnit.module("mu-jquery-loom/jquery.loom#weave");
 
   QUnit.test("constructor called with default arguments", function (assert) {
+    var guid = $.guid;
+    var count = 0;
+    var name = "test";
+    var $element = $("<div></div>")
+      .attr("mu-widget", name);
+
     assert.expect(3);
 
-    var count = 0;
-    var m = "test";
-    var $e = $("<div></div>").attr("mu-widget", m);
-
-    return loom.call($e, "[mu-widget]", "mu-widget", function () {
-      return function ($element, ns) {
-        this.$element = $element;
-        this.ns = ns;
-        assert.strictEqual(arguments.length, 2, "arguments.length is 2");
-        assert.ok($element.is($e), "$element matches");
-        assert.strictEqual(ns, name.call(m, ++count), "ns matches");
-      };
-    })
+    return loom
+      .call($element, "[mu-widget]", "mu-widget", function () {
+        return function ($element, ns) {
+          this.$element = $element;
+          this.ns = ns;
+          assert.strictEqual(arguments.length, 2, "arguments.length is 2");
+          assert.ok($element.is($element), "$element matches");
+          assert.strictEqual(ns, name.call(name, count++ + guid), "ns matches");
+        };
+      })
       .weave();
   });
 
   QUnit.test("constructor called with extra arguments", function (assert) {
+    var guid = $.guid;
+    var count = 0;
+    var name = "test";
+    var obj = {};
+    var $element = $("<div></div>")
+      .attr("mu-widget", name);
+
     assert.expect(4);
 
-    var count = 0;
-    var m = "test";
-    var $e = $("<div></div>").attr("mu-widget", m);
-    var obj = {};
-
-    return loom.call($e, "[mu-widget]", "mu-widget", function () {
-      return function ($element, ns, o) {
-        this.$element = $element;
-        this.ns = ns;
-        assert.strictEqual(arguments.length, 3, "arguments.length is 3");
-        assert.ok($element.is($e), "$element matches");
-        assert.strictEqual(ns, name.call(m, ++count), "ns matches");
-        assert.strictEqual(o, obj);
-      };
-    }, obj)
+    return loom
+      .call($element, "[mu-widget]", "mu-widget", function () {
+        return function ($element, ns, o) {
+          this.$element = $element;
+          this.ns = ns;
+          assert.strictEqual(arguments.length, 3, "arguments.length is 3");
+          assert.ok($element.is($element), "$element matches");
+          assert.strictEqual(ns, name.call(name, count++ + guid), "ns matches");
+          assert.strictEqual(o, obj);
+        };
+      }, obj)
       .weave();
   });
 
   QUnit.test("initialize called", function (assert) {
+    var $element = $("<div></div>")
+      .attr("mu-widget", "test");
+
     assert.expect(1);
 
-    var $e = $("<div></div>").attr("mu-widget", "test");
-
-    return loom.call($e, "[mu-widget]", "mu-widget", function () {
-      return function ($element, ns) {
-        this.$element = $element.on("initialize." + ns, function () {
-          assert.ok(true, "initialize called");
-        });
-        this.ns = ns;
-      };
-    })
+    return loom
+      .call($element, "[mu-widget]", "mu-widget", function () {
+        return function ($element, ns) {
+          this.$element = $element.on("initialize." + ns, function () {
+            assert.ok(true, "initialize called");
+          });
+          this.ns = ns;
+        };
+      })
       .weave();
   });
 });

@@ -29,23 +29,23 @@
     }
   };
 
-  function load(module) {
-    return modules[module] || modules.widget;
+  function load(name) {
+    return modules[name] || modules.widget;
   }
 
-  function id(i) {
-    return this + "@" + i;
+  function id(name,i) {
+    return name + "@" + i;
   }
 
-  function assert_result(m, $elements) {
+  function assert_result(names, $elements, guid) {
     var assert = this;
 
     return function (result) {
       $.each(result, function (index, widgets) {
         $.each(widgets, function (count, widget) {
-          assert.ok(widget instanceof load(m[count]), "instanceof widgets");
+          assert.ok(widget instanceof load(names[count]), "instanceof widgets");
           assert.ok(widget.$element.is($elements[index]), "widget.$element");
-          assert.strictEqual(widget.ns, id.call(m[count], index * m.length + count + 1), "widget.ns");
+          assert.strictEqual(widget.ns, id(names[count], index * names.length + count + guid), "widget.ns");
         });
       });
     }
@@ -54,6 +54,7 @@
   QUnit.module("mu-jquery-loom/jquery.weave#result");
 
   QUnit.test("1/1 (widgets/elements)", function (assert) {
+    var guid = $.guid;
     var $elements = $("<span></span>")
       .attr("mu-widget", "one");
 
@@ -61,10 +62,11 @@
 
     return weave
       .call($elements, "mu-widget", load)
-      .done(assert_result.call(assert, ["one"], $elements));
+      .done(assert_result.call(assert, ["one"], $elements, guid));
   });
 
   QUnit.test("1/n (widgets/elements)", function (assert) {
+    var guid = $.guid;
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", "one");
 
@@ -72,43 +74,47 @@
 
     return weave
       .call($elements, "mu-widget", load)
-      .done(assert_result.call(assert, ["one"], $elements));
+      .done(assert_result.call(assert, ["one"], $elements, guid));
   });
 
   QUnit.test("n/1 (widgets/elements)", function (assert) {
-    var m = ["one", "two"]
+    var guid = $.guid;
+    var names = ["one", "two"]
     var $elements = $("<span></span>")
-      .attr("mu-widget", m.join(" "));
+      .attr("mu-widget", names.join(" "));
 
-    assert.expect($elements.length * m.length * 3);
+    assert.expect($elements.length * names.length * 3);
 
     return weave
       .call($elements, "mu-widget", load)
-      .done(assert_result.call(assert, m, $elements));
+      .done(assert_result.call(assert, names, $elements, guid));
   });
 
   QUnit.test("n/n (widgets/elements)", function (assert) {
-    var m = ["one", "two"]
+    var guid = $.guid;
+    var names = ["one", "two"]
     var $elements = $("<span></span><div></div>")
-      .attr("mu-widget", m.join(" "));
+      .attr("mu-widget", names.join(" "));
 
-    assert.expect($elements.length * m.length * 3);
+    assert.expect($elements.length * names.length * 3);
 
     return weave
       .call($elements, "mu-widget", load)
-      .done(assert_result.call(assert, m, $elements));
+      .done(assert_result.call(assert, names, $elements, guid));
   });
 
   QUnit.module("mu-jquery-loom/jquery.weave#initialize");
 
   QUnit.test("triggered on all elements", function (assert) {
-    var $elements = $("<span></span><div></div>").each(function (index, element) {
-      $(element)
-        .attr("mu-widget", "one")
-        .on("initialize." + id.call("one", index + 1), function () {
-          assert.ok(true, "initialize called");
-        });
-    });
+    var guid = $.guid + 2; // $.guid + ($elements * handlers)
+    var $elements = $("<span></span><div></div>")
+      .attr("mu-widget", "one")
+      .each(function (index, element) {
+        $(element)
+          .on("initialize." + id("one", index + guid), function () {
+            assert.ok(true, "initialize called");
+          });
+      }); 
 
     assert.expect($elements.length);
 
@@ -116,8 +122,9 @@
   });
 
   QUnit.test("callback triggered after all handlers", function (assert) {
+    var guid = $.guid + 4; // $.guid + ($elements * handlers)
     var $elements = $("<span></span><div></div>").each(function (index, element) {
-      var _id = id.call("one", index + 1);
+      var _id = id("one", index + guid);
       $(element)
         .attr("mu-widget", "one")
         .on("initialize." + _id, function () {
@@ -136,11 +143,11 @@
   });
 
   QUnit.test("return promise to delay result", function (assert) {
-    var count = 0;
+    var guid = $.guid + 2; // $.guid + ($elements * handlers)
     var $elements = $("<span></span><div></div>").each(function (index, element) {
       $(element)
         .attr("mu-widget", "one")
-        .on("initialize." + id.call("one", index + 1), capture.call($, function () {
+        .on("initialize." + id("one", index + guid), capture.call($, function () {
           return $.Deferred(function (deferred) {
             setTimeout(deferred.resolve, 0);
           }).done(function () {

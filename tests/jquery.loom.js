@@ -33,9 +33,9 @@
   QUnit.test("constructor called with default arguments", function (assert) {
     var guid = $.guid;
     var count = 0;
-    var name = "test";
+    var names = "test";
     var $element = $("<div></div>")
-      .attr("mu-widget", name);
+      .attr("mu-widget", names);
 
     assert.expect(3);
 
@@ -46,7 +46,7 @@
           this.ns = ns;
           assert.strictEqual(arguments.length, 2, "arguments.length is 2");
           assert.ok($element.is($element), "$element matches");
-          assert.strictEqual(ns, name.call(name, count++ + guid), "ns matches");
+          assert.strictEqual(ns, name.call(names, count++ + guid), "ns matches");
         };
       })
       .weave();
@@ -55,10 +55,10 @@
   QUnit.test("constructor called with extra arguments", function (assert) {
     var guid = $.guid;
     var count = 0;
-    var name = "test";
+    var names = "test";
     var obj = {};
     var $element = $("<div></div>")
-      .attr("mu-widget", name);
+      .attr("mu-widget", names);
 
     assert.expect(4);
 
@@ -69,7 +69,7 @@
           this.ns = ns;
           assert.strictEqual(arguments.length, 3, "arguments.length is 3");
           assert.ok($element.is($element), "$element matches");
-          assert.strictEqual(ns, name.call(name, count++ + guid), "ns matches");
+          assert.strictEqual(ns, name.call(names, count++ + guid), "ns matches");
           assert.strictEqual(o, obj);
         };
       }, obj)

@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/mu-lib/mu-jquery-loom/compare/v3.0.8...v4.0.0) (2017-04-22)
+
+
+### Bug Fixes
+
+* loom.crank should only get first argument as default param. ([559076c](https://github.com/mu-lib/mu-jquery-loom/commit/559076c))
+* remove selector from loom ([ef242eb](https://github.com/mu-lib/mu-jquery-loom/commit/ef242eb))
+* rename twist ([3b618c2](https://github.com/mu-lib/mu-jquery-loom/commit/3b618c2))
+
+
+### Features
+
+* added expr ([667b3c3](https://github.com/mu-lib/mu-jquery-loom/commit/667b3c3))
+
+
+### BREAKING CHANGES
+
+* Renamed `twist` to `wire`. Also removed `twist` from `loom`.
+* The signature of `jquery.loom` has changed.
+
+
+
 <a name="3.0.8"></a>
 ## [3.0.8](https://github.com/mu-lib/mu-jquery-loom/compare/v3.0.7...v3.0.8) (2017-04-20)
 

@@ -8,7 +8,7 @@
       return root[m.replace(/^\./, "mu-jquery-loom")];
     }));
   }
-})(["./jquery.twist", "mu-jquery-crank/jquery.crank"], this, function (twist, crank) {
+})(["./jquery.wire", "mu-jquery-crank/jquery.crank"], this, function (wire, crank) {
   var slice = Array.prototype.slice;
 
   function collect() {
@@ -23,7 +23,7 @@
     var me = this;
     var $ = me.constructor;
 
-    return twist.apply(me, slice.call(arguments)).then(function (result) {
+    return wire.apply(me, slice.call(arguments)).then(function (result) {
       return $.when.apply(null, $.map(result, function (widgets, index) {
         var callbacks;
         return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize", (callbacks = $.Callbacks("once")).add)

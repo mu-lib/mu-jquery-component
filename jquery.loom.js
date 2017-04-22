@@ -8,11 +8,10 @@
       return root[m.replace(/^\./, "mu-jquery-loom")];
     }));
   }
-})(["./jquery.crank", "./jquery.twist", "./jquery.weave"], this, function (crank, twist, weave) {
+})(["./jquery.crank", "./jquery.weave"], this, function (crank, weave) {
   var slice = Array.prototype.slice;
   var ops = {
     "crank": crank,
-    "twist": twist,
     "weave": weave
   };
 
@@ -21,7 +20,7 @@
     var args = slice.call(arguments);
     var selector = "[" + attr + "]";
 
-    me.constructor.each(ops, function(op, fn) {
+    me.constructor.each(ops, function (op, fn) {
       me[op] = function () {
         return fn.apply(this.find(selector).addBack(selector), args.concat(slice.call(arguments)));
       };

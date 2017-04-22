@@ -10,22 +10,23 @@
   }
 })(["./jquery.crank", "./jquery.weave"], this, function (crank, weave) {
   var slice = Array.prototype.slice;
-  var ops = {
-    "crank": crank,
-    "weave": weave
-  };
+
+  function find($element, selector) {
+    return $element.find(selector).addBack(selector);
+  }
 
   return function (attr) {
-    var me = this;
+    var arg = [attr];
     var args = slice.call(arguments);
     var selector = "[" + attr + "]";
 
-    me.constructor.each(ops, function (op, fn) {
-      me[op] = function () {
-        return fn.apply(this.find(selector).addBack(selector), args.concat(slice.call(arguments)));
-      };
+    return this.extend({
+      "crank": function () {
+        return crank.apply(find(this, selector), arg.concat(slice.call(arguments)));
+      },
+      "weave": function () {
+        return weave.apply(find(this, selector), args.concat(slice.call(arguments)));
+      }
     });
-
-    return me;
   }
 });

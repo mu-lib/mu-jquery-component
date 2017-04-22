@@ -10,29 +10,23 @@
   }
 })(["./jquery.crank", "./jquery.twist", "./jquery.weave"], this, function (crank, twist, weave) {
   var slice = Array.prototype.slice;
+  var ops = {
+    "crank": crank,
+    "twist": twist,
+    "weave": weave
+  };
 
-  function find(selector) {
-    return this.find(selector).addBack(selector);
-  }
+  return function (attr) {
+    var me = this;
+    var args = slice.call(arguments);
+    var selector = "[" + attr + "]";
 
-  return function (selector) {
-    var args = slice.call(arguments, 1);
-    var a = args.slice(0, 1);
-
-    this.extend({
-      "crank": function () {
-        return crank.apply(find.call(this, selector), a.concat(slice.call(arguments)));
-      },
-
-      "twist": function () {
-        return twist.apply(find.call(this, selector), args.concat(slice.call(arguments)));
-      },
-
-      "weave": function () {
-        return weave.apply(find.call(this, selector), args.concat(slice.call(arguments)));
-      }
+    me.constructor.each(ops, function(op, fn) {
+      me[op] = function () {
+        return fn.apply(this.find(selector).addBack(selector), args.concat(slice.call(arguments)));
+      };
     });
 
-    return this;
+    return me;
   }
 });

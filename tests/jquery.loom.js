@@ -40,7 +40,7 @@
     assert.expect(3);
 
     return loom
-      .call($element, "[mu-widget]", "mu-widget", function () {
+      .call($element, "mu-widget", function () {
         return function ($element, ns) {
           this.$element = $element;
           this.ns = ns;
@@ -63,7 +63,7 @@
     assert.expect(4);
 
     return loom
-      .call($element, "[mu-widget]", "mu-widget", function () {
+      .call($element, "mu-widget", function () {
         return function ($element, ns, o) {
           this.$element = $element;
           this.ns = ns;
@@ -83,7 +83,7 @@
     assert.expect(1);
 
     return loom
-      .call($element, "[mu-widget]", "mu-widget", function () {
+      .call($element, "mu-widget", function () {
         return function ($element, ns) {
           this.$element = $element.on("initialize." + ns, function () {
             assert.ok(true, "initialize called");

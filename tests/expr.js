@@ -44,6 +44,22 @@
     assert.notOk($element.is(":loom"), "selector does not match");
   });
 
+  QUnit.test("not matching woven", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div>", { "mu-widget": "test@123"});
+
+    assert.notOk($element.is(":loom"), "selector does not match");
+  });
+
+  QUnit.test("not matching selector woven", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div>", { "mu-widget": "test@123"});
+
+    assert.notOk($element.is(":loom(tes)"), "selector does not match");
+  });
+
   QUnit.test("matching selector", function (assert) {
     assert.expect(1);
 

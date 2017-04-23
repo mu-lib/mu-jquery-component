@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/mu-lib/mu-jquery-loom/compare/v4.0.0...v4.0.1) (2017-04-23)
+
+
+### Bug Fixes
+
+* expr regexp error ([b674fb9](https://github.com/mu-lib/mu-jquery-loom/commit/b674fb9))
+* expr should not match woven ([afe304e](https://github.com/mu-lib/mu-jquery-loom/commit/afe304e))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/mu-lib/mu-jquery-loom/compare/v3.0.8...v4.0.0) (2017-04-22)
 

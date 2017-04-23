@@ -52,10 +52,18 @@
     assert.ok($element.is(":loom"), "selector matches");
   });
 
-  QUnit.test("matching search selector", function (assert) {
+  QUnit.test("matching search selector (one)", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>", { "mu-widget": "test"});
+
+    assert.ok($element.is(":loom(tes)"), "selector matches");
+  });
+
+  QUnit.test("matching search selector (many)", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div>", { "mu-widget": "xyz test zoom"});
 
     assert.ok($element.is(":loom(tes)"), "selector matches");
   });

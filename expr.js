@@ -10,7 +10,7 @@
   function matches($, element, attr, search) {
     var value = $(element).attr(attr);
     return search
-      ? new RegExp("(?:^|\s+)" + search).test(value)
+      ? new RegExp("(?:^|\\s+)" + search).test(value)
       : value;
   }
 

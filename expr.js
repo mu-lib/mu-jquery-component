@@ -9,7 +9,7 @@
 })([], this, function () {
   function matches($, element, attr, search) {
     var value = $(element).attr(attr);
-    return value !== undefined && new RegExp("(?:^|\\s)" + (search || "") + "[^@]*(?:\\s|$)").test(value);
+    return value !== undefined && new RegExp("(?:^|\\s)" + (search || "")).test(value);
   }
 
   return function ($, attr) {

@@ -36,7 +36,7 @@
     }
   });
 
-  QUnit.test("not matching selector", function (assert) {
+  QUnit.test("not matching", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>");
@@ -44,23 +44,23 @@
     assert.notOk($element.is(":loom"), "selector does not match");
   });
 
-  QUnit.test("not matching woven", function (assert) {
+  QUnit.test("matching woven", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>", { "mu-widget": "test@123"});
 
-    assert.notOk($element.is(":loom"), "selector does not match");
+    assert.ok($element.is(":loom"), "selector does not match");
   });
 
-  QUnit.test("not matching selector woven", function (assert) {
+  QUnit.test("matching search woven", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>", { "mu-widget": "test@123"});
 
-    assert.notOk($element.is(":loom(tes)"), "selector does not match");
+    assert.ok($element.is(":loom(tes)"), "selector does not match");
   });
 
-  QUnit.test("matching selector", function (assert) {
+  QUnit.test("matching", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>", { "mu-widget": "test"});
@@ -68,7 +68,7 @@
     assert.ok($element.is(":loom"), "selector matches");
   });
 
-  QUnit.test("matching search selector (one)", function (assert) {
+  QUnit.test("matching search (one)", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>", { "mu-widget": "test"});
@@ -76,7 +76,7 @@
     assert.ok($element.is(":loom(tes)"), "selector matches");
   });
 
-  QUnit.test("matching search selector (many)", function (assert) {
+  QUnit.test("matching search (many)", function (assert) {
     assert.expect(1);
 
     var $element = $("<div>", { "mu-widget": "xyz test zoom"});
@@ -84,7 +84,7 @@
     assert.ok($element.is(":loom(tes)"), "selector matches");
   });
 
-  QUnit.test("matching selector for several $elements", function (assert) {
+  QUnit.test("matching for several $elements", function (assert) {
     assert.expect(1);
 
     var $elements = $("<div></div><div></div><div></div>");

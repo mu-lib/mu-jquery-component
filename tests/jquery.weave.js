@@ -11,12 +11,7 @@
         "qunit": root.QUnit
       }));
   }
-})([
-  "qunit",
-  "jquery",
-  "mu-jquery-capture/capture",
-  "../jquery.weave"
-], this, function (QUnit, $, capture, weave) {
+})(["qunit", "jquery", "mu-jquery-capture/capture", "../jquery.weave"], this, function (QUnit, $, capture, weave) {
   var slice = Array.prototype.slice;
   var setTimeout = this.setTimeout;
 
@@ -33,7 +28,7 @@
     return modules[name] || modules.widget;
   }
 
-  function id(name,i) {
+  function id(name, i) {
     return name + "@" + i;
   }
 
@@ -114,7 +109,7 @@
           .on("initialize." + id("one", index + guid), function () {
             assert.ok(true, "initialize called");
           });
-      }); 
+      });
 
     assert.expect($elements.length);
 
@@ -131,7 +126,7 @@
           assert.ok(true, "initialize called");
         })
         .on("initialize." + _id, function ($event, cb) {
-          cb(function(result) {
+          cb(function (result) {
             assert.deepEqual(result, [[_id]], "callback called");
           });
         });
@@ -147,7 +142,7 @@
     var $elements = $("<span></span><div></div>").each(function (index, element) {
       $(element)
         .attr("mu-widget", "one")
-        .on("initialize." + id("one", index + guid), capture.call($, function () {
+        .on("initialize." + id("one", index + guid), capture($, function () {
           return $.Deferred(function (deferred) {
             setTimeout(deferred.resolve, 0);
           }).done(function () {

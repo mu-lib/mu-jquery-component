@@ -26,7 +26,7 @@
   "devDependencies": {
     "qunitjs": "^2.3.2",
     "jquery": "^3.2.1",
-    "mu-jquery-capture": "^2.0.1",
+    "mu-jquery-capture": "^3.0.0",
     "standard-version": "^4.0.0"
   }
 }

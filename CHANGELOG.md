@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.3"></a>
+## [5.0.3](https://github.com/mu-lib/mu-jquery-loom/compare/v5.0.2...v5.0.3) (2017-05-04)
+
+
+### Bug Fixes
+
+* bump deps ([9e1c884](https://github.com/mu-lib/mu-jquery-loom/commit/9e1c884))
+
+
+
 <a name="5.0.2"></a>
 ## [5.0.2](https://github.com/mu-lib/mu-jquery-loom/compare/v5.0.1...v5.0.2) (2017-04-25)
 

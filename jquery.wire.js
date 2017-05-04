@@ -11,7 +11,7 @@
 })(["mu-jquery-wire/jquery.wire", "./create"], this, function (wire, create) {
   var slice = Array.prototype.slice;
   var re_space = /\s+/;
-  var re_clean = /@\d+$/;
+  var re_clean = /(?:^|@\d+)$/;
 
   function clean(value) {
     return !re_clean.test(value);

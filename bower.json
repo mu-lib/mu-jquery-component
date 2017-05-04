@@ -15,12 +15,12 @@
   "dependencies": {
     "jquery": "^3.0.0",
     "mu-jquery-wire": "^5.0.8",
-    "mu-jquery-crank": "^5.0.5"
+    "mu-jquery-crank": "^5.0.6"
   },
   "devDependencies": {
     "qunit": "^2.3.2",
     "jquery": "^3.2.1",
-    "mu-jquery-capture": "^2.0.1"
+    "mu-jquery-capture": "^3.0.1"
   },
   "version": "5.0.2"
 }

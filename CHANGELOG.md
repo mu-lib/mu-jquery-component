@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/mu-lib/mu-jquery-loom/compare/v5.0.5...v6.0.0) (2017-05-07)
+
+
+### Features
+
+* normalize array result ([b79b041](https://github.com/mu-lib/mu-jquery-loom/commit/b79b041))
+
+
+### BREAKING CHANGES
+
+* `undefined` results are now mapped to `[]`.
+
+
+
 <a name="5.0.5"></a>
 ## [5.0.5](https://github.com/mu-lib/mu-jquery-loom/compare/v5.0.4...v5.0.5) (2017-05-07)
 

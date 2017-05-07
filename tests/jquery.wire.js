@@ -47,7 +47,7 @@
     }
   }
 
-  QUnit.module("mu-jquery-loom/jquery.wire");
+  QUnit.module("mu-jquery-loom/jquery.wire#callback");
 
   QUnit.test("noop", function (assert) {
     var $elements = $("<span></span>");
@@ -58,8 +58,6 @@
       assert.notOk(true, "shound not be called");
     });
   });
-
-  QUnit.module("mu-jquery-loom/jquery.wire#callback");
 
   QUnit.test("returning undefined defaults to name", function (assert) {
     var $elements = $("<span></span>")
@@ -221,6 +219,18 @@
 
   QUnit.module("mu-jquery-loom/jquery.wire#result");
 
+  QUnit.test("$noop", function (assert) {
+    var $elements = $();
+
+    assert.expect(1);
+
+    return wire
+      .call($elements, "mu-widget", function () { })
+      .then(function (result) {
+        assert.deepEqual(result, [], "result matches");
+      });
+  });
+
   QUnit.test("returning undefined defaults to name", function (assert) {
     var $elements = $("<span></span>")
       .attr("mu-widget", "one");
@@ -234,7 +244,7 @@
       });
   });
 
-  QUnit.test("0/0 (widgets/elements)", function (assert) {
+  QUnit.test("0/1 (widgets/elements)", function (assert) {
     var $elements = $("<span></span>");
 
     assert.expect(1);
@@ -242,7 +252,7 @@
     return wire
       .call($elements, "mu-widget", load)
       .done(function (result) {
-        assert.deepEqual(result, [], "result matches");
+        assert.deepEqual(result, [[]], "result matches");
       });
   });
 

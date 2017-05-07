@@ -14,8 +14,8 @@
   ],
   "dependencies": {
     "jquery": "^3.0.0",
-    "mu-jquery-wire": "^5.0.8",
-    "mu-jquery-crank": "^5.0.6"
+    "mu-jquery-wire": "^6.0.0",
+    "mu-jquery-crank": "^6.0.0"
   },
   "devDependencies": {
     "qunit": "^2.3.2",

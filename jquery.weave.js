@@ -26,11 +26,14 @@
     return wire.apply(me, slice.call(arguments)).then(function (result) {
       return $.when.apply(null, result.map(function (widgets, index) {
         var callbacks;
-        return widgets && crank.call(widgets[0].$element, widgets.map(ns), "initialize", (callbacks = $.Callbacks("once")).add)
-          .then(callbacks.fire)
-          .then(function () {
-            return widgets;
-          });
+        var $element;
+        return widgets.length && ($element = widgets[0].$element)
+          ? crank.call($element, widgets.map(ns), "initialize", (callbacks = $.Callbacks("once")).add)
+            .then(callbacks.fire)
+            .then(function () {
+              return widgets;
+            })
+          : widgets;
       })).then(collect);
     });
   }

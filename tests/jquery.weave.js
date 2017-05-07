@@ -46,7 +46,7 @@
     }
   }
 
-  QUnit.module("mu-jquery-loom/jquery.weave");
+  QUnit.module("mu-jquery-loom/jquery.weave#callback");
 
   QUnit.test("noop", function (assert) {
     var $elements = $("<span></span>");
@@ -60,8 +60,8 @@
 
   QUnit.module("mu-jquery-loom/jquery.weave#result");
 
-  QUnit.test("0/0 (widgets/elements)", function (assert) {
-    var $elements = $("<span></span>", { "mu-widget": "" });
+  QUnit.test("$noop", function (assert) {
+    var $elements = $();
 
     assert.expect(1);
 
@@ -69,6 +69,31 @@
       .call($elements, "mu-widget", load)
       .then(function (result) {
         assert.deepEqual(result, [], "result matches");
+      });
+  });
+
+  QUnit.test("returning undefined defaults to name", function (assert) {
+    var $elements = $("<span></span>")
+      .attr("mu-widget", "one");
+
+    assert.expect(1);
+
+    return weave
+      .call($elements, "mu-widget", function () { })
+      .then(function (result) {
+        assert.deepEqual(result, [["one"]], "result matches");
+      });
+  });
+
+  QUnit.test("0/1 (widgets/elements)", function (assert) {
+    var $elements = $("<span></span>", { "mu-widget": "" });
+
+    assert.expect(1);
+
+    return weave
+      .call($elements, "mu-widget", load)
+      .then(function (result) {
+        assert.deepEqual(result, [[]], "result matches");
       });
   });
 

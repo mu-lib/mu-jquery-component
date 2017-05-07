@@ -122,9 +122,9 @@
     var names = ["one", "two"];
     var $elements = $("<span></span><div></div>")
       .attr("mu-widget", names.join(" "));
-    var count = 1;
+    var count = 0;
 
-    assert.expect($elements.length);
+    assert.expect(1);
 
     return wire
       .call($elements, "mu-widget", {
@@ -132,8 +132,11 @@
           return m !== "one" && load.call(this, m);
         },
         "create": function (c, args) {
-          assert.strictEqual(args[1], "two@" + count++, "ns matches");
+          count++;
         }
+      })
+      .then(function () {
+        assert.strictEqual(count, 2, "count matches");
       });
   });
 

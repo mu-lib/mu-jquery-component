@@ -46,7 +46,31 @@
     }
   }
 
+  QUnit.module("mu-jquery-loom/jquery.weave");
+
+  QUnit.test("noop", function (assert) {
+    var $elements = $("<span></span>");
+
+    assert.expect(0);
+
+    return weave.call($elements, "mu-widget", function () {
+      assert.notOk(true, "shound not be called");
+    });
+  });
+
   QUnit.module("mu-jquery-loom/jquery.weave#result");
+
+  QUnit.test("0/0 (widgets/elements)", function (assert) {
+    var $elements = $("<span></span>", { "mu-widget": "" });
+
+    assert.expect(1);
+
+    return weave
+      .call($elements, "mu-widget", load)
+      .then(function (result) {
+        assert.deepEqual(result, [], "result matches");
+      });
+  });
 
   QUnit.test("1/1 (widgets/elements)", function (assert) {
     var guid = $.guid;

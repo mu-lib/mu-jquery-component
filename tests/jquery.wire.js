@@ -61,6 +61,19 @@
 
   QUnit.module("mu-jquery-loom/jquery.wire#callback");
 
+  QUnit.test("returning undefined defaults to name", function (assert) {
+    var $elements = $("<span></span>")
+      .attr("mu-widget", "one");
+
+    assert.expect(1);
+
+    return wire
+      .call($elements, "mu-widget", function () { })
+      .then(function (result) {
+        assert.deepEqual(result, [["one"]], "result matches");
+      });
+  });
+
   QUnit.test("typeof(function) called for each element with correct parameters", function (assert) {
     var names = ["one", "two"];
     var $elements = $("<span></span><div></div>")
@@ -101,6 +114,25 @@
         "callback": function (name, index) {
           assert.strictEqual(name, names[index], "check that name matches");
           return load.apply(this, arguments);
+        }
+      });
+  });
+
+  QUnit.test("!typeof(function).create not called if .callback returns falsy", function (assert) {
+    var names = ["one", "two"];
+    var $elements = $("<span></span><div></div>")
+      .attr("mu-widget", names.join(" "));
+    var count = 1;
+
+    assert.expect($elements.length);
+
+    return wire
+      .call($elements, "mu-widget", {
+        "callback": function (m) {
+          return m !== "one" && load.call(this, m);
+        },
+        "create": function (c, args) {
+          assert.strictEqual(args[1], "two@" + count++, "ns matches");
         }
       });
   });
@@ -185,6 +217,19 @@
   });
 
   QUnit.module("mu-jquery-loom/jquery.wire#result");
+
+  QUnit.test("returning undefined defaults to name", function (assert) {
+    var $elements = $("<span></span>")
+      .attr("mu-widget", "one");
+
+    assert.expect(1);
+
+    return wire
+      .call($elements, "mu-widget", function () { })
+      .then(function (result) {
+        assert.deepEqual(result, [["one"]], "result matches");
+      });
+  });
 
   QUnit.test("0/0 (widgets/elements)", function (assert) {
     var $elements = $("<span></span>");

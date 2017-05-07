@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.4"></a>
+## [5.0.4](https://github.com/mu-lib/mu-jquery-loom/compare/v5.0.3...v5.0.4) (2017-05-07)
+
+
+### Bug Fixes
+
+* don't wire if no widget ([a24d813](https://github.com/mu-lib/mu-jquery-loom/commit/a24d813))
+* return undefined from callback ([9997c69](https://github.com/mu-lib/mu-jquery-loom/commit/9997c69))
+
+
+
 <a name="5.0.3"></a>
 ## [5.0.3](https://github.com/mu-lib/mu-jquery-loom/compare/v5.0.2...v5.0.3) (2017-05-04)
 

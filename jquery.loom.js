@@ -1,14 +1,12 @@
-(function (modules, root, factory) {
+(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(modules, factory);
+    define(["./jquery.crank", "./jquery.weave"], factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory.apply(root, modules.map(require));
+    module.exports = factory(require("./jquery.crank"), require("./jquery.weave"));
   } else {
-    root["mu-jquery-loom/jquery.loom"] = factory.apply(root, modules.map(function (m) {
-      return root[m.replace(/^\./, "mu-jquery-loom")];
-    }));
+    root["mu-jquery-loom/jquery.loom"] = factory(root["mu-jquery-loom/jquery.crank"], root["mu-jquery-loom/jquery.weave"]);
   }
-})(["./jquery.crank", "./jquery.weave"], this, function (crank, weave) {
+})(this, function (crank, weave) {
   var slice = Array.prototype.slice;
 
   function find($element, selector) {

@@ -1,14 +1,12 @@
-(function (modules, root, factory) {
+(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(modules, factory);
+    define(["mu-jquery-crank/jquery.crank"], factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory.apply(root, modules.map(require));
+    module.exports = factory(require("mu-jquery-crank/jquery.crank"));
   } else {
-    root["mu-jquery-loom/jquery.crank"] = factory.apply(root, modules.map(function (m) {
-      return root[m];
-    }));
+    root["mu-jquery-loom/jquery.crank"] = factory(root["mu-jquery-crank/jquery.crank"]);
   }
-})(["mu-jquery-crank/jquery.crank"], this, function (crank) {
+})(this, function (crank) {
   var slice = Array.prototype.slice;
   var re_space = /\s+/;
 

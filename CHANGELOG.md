@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/mu-lib/mu-jquery-loom/compare/v6.0.1...v7.0.0) (2017-10-24)
+
+
+### Bug Fixes
+
+* bump deps ([634433e](https://github.com/mu-lib/mu-jquery-loom/commit/634433e))
+* loom.crank should not deep call ([#2](https://github.com/mu-lib/mu-jquery-loom/issues/2)) ([98c8ee2](https://github.com/mu-lib/mu-jquery-loom/commit/98c8ee2))
+
+
+### BREAKING CHANGES
+
+* With this commit `loom.crank` no longer call inner
+widgets, just on the current element(s)
+
+
+
 <a name="6.0.1"></a>
 ## [6.0.1](https://github.com/mu-lib/mu-jquery-loom/compare/v6.0.0...v6.0.1) (2017-06-16)
 

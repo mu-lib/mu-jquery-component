@@ -93,4 +93,32 @@
       })
       .weave();
   });
+
+  QUnit.module("mu-jquery-loom/jquery.loom#crank");
+
+  QUnit.test("crank calls are not deep", function (assert) {
+    var $outer = $("<div></div>", {
+      "mu-widget": "test"
+    });
+    var $inner = $("<div></div>", {
+      "mu-widget": "test"
+    });
+    $outer.append($inner);
+
+    assert.expect(1);
+
+    return loom
+      .call($outer, "mu-widget", function () {
+        return function ($element, ns) {
+          this.$element = $element.on("test." + ns, function () {
+            assert.ok(true, "test called");
+          });
+          this.ns = ns;
+        };
+      })
+      .weave()
+      .then(function () {
+        return $outer.crank("test");
+      });
+  });
 });
